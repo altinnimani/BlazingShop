@@ -23,7 +23,9 @@ namespace BlazingShop.Server.Services.ProductService
 
         public async Task<Product> GetProduct(int id)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products
+                .Include(p => p.Editions)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<List<Product>> GetProductsByCategory(string categoryUrl)
