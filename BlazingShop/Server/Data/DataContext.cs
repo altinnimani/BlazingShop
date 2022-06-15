@@ -16,6 +16,9 @@ namespace BlazingShop.Server.Data
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ProductVariant>()
+                .HasKey(p => new { p.ProductId, p.EditionId });
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Books", Url = "books", Icon = "book" },
                 new Category { Id = 2, Name = "Electronics", Url = "electronics", Icon = "camera-slr" },
@@ -30,8 +33,6 @@ namespace BlazingShop.Server.Data
                     Title = "The Hitchhiker's Guide to the Galaxy",
                     Description = "The Hitchhiker's Guide to the Galaxy (sometimes referred to as HG2G, HHGTTG, H2G2, or tHGttG) is a comedy science fiction series created by Douglas Adams.",
                     Image = "https://upload.wikimedia.org/wikipedia/en/b/bd/H2G2_UK_front_cover.jpg",
-                    Price = 9.99m,
-                    OriginalPrice = 19.99m,
                     DateCreated = new DateTime(2022, 6, 10)
                 },
                 new Product
@@ -41,8 +42,6 @@ namespace BlazingShop.Server.Data
                     Title = "Ready Player One",
                     Description = "Ready Player One is a 2011 science fiction novel, and the debut novel of American author Ernest Cline. The story, set in a dystopia in 2045, follows protagonist Wade Watts on his search for an Easter egg in a worldwide virtual reality game, the discovery of which would lead him to inherit the game creator's fortune.",
                     Image = "https://upload.wikimedia.org/wikipedia/en/a/a4/Ready_Player_One_cover.jpg",
-                    Price = 8.19m,
-                    OriginalPrice = 29.99m,
                     DateCreated = new DateTime(2022, 6, 10)
                 },
                 new Product
@@ -111,25 +110,104 @@ namespace BlazingShop.Server.Data
             );
 
             modelBuilder.Entity<Edition>().HasData(
-                new Edition {  Id = 1, Name = "Paperback"},
-                new Edition {  Id = 2, Name = "E-Book"},
-                new Edition {  Id = 3, Name = "Audiobook"},
-                new Edition {  Id = 4, Name = "Pc"},
-                new Edition {  Id = 5, Name = "Playstation"},
-                new Edition { Id = 6, Name = "Xbox" }
+                new Edition {  Id = 1, Name = "Default"},
+                new Edition {  Id = 2, Name = "Paperback"},
+                new Edition {  Id = 3, Name = "E-Book"},
+                new Edition {  Id = 4, Name = "Audiobook"},
+                new Edition {  Id = 5, Name = "Pc"},
+                new Edition {  Id = 6, Name = "Playstation"},
+                new Edition { Id = 7, Name = "Xbox" }
             );
 
-            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("EditionProduct")
-                .HasData(
-                    new { EditionsId = 1, ProductsId = 1 },
-                    new { EditionsId = 2, ProductsId = 1 },
-                    new { EditionsId = 3, ProductsId = 1 },
-                    new { EditionsId = 1, ProductsId = 2 },
-                    new { EditionsId = 2, ProductsId = 2 },
-                    new { EditionsId = 4, ProductsId = 7 },
-                    new { EditionsId = 5, ProductsId = 7 },
-                    new { EditionsId = 6, ProductsId = 7 }
-                );
+            modelBuilder.Entity<ProductVariant>().HasData(
+                new ProductVariant
+                {
+                    ProductId = 1,
+                    EditionId = 2,
+                    Price = 9.99m,
+                    OriginalPrice = 19.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 1,
+                    EditionId = 3,
+                    Price = 7.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 1,
+                    EditionId = 4,
+                    Price = 19.99m,
+                    OriginalPrice = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 2,
+                    EditionId = 2,
+                    Price = 7.99m,
+                    OriginalPrice = 14.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 3,
+                    EditionId = 2,
+                    Price = 6.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 4,
+                    EditionId = 1,
+                    Price = 166.66m,
+                    OriginalPrice = 249.00m
+                },
+                new ProductVariant
+                {
+                    ProductId = 5,
+                    EditionId = 1,
+                    Price = 159.99m,
+                    OriginalPrice = 299m
+                },
+                new ProductVariant
+                {
+                    ProductId = 6,
+                    EditionId = 1,
+                    Price = 73.74m,
+                    OriginalPrice = 400m
+                },
+                new ProductVariant
+                {
+                    ProductId = 7,
+                    EditionId = 5,
+                    Price = 19.99m,
+                    OriginalPrice = 29.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 7,
+                    EditionId = 6,
+                    Price = 69.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 7,
+                    EditionId = 7,
+                    Price = 49.99m,
+                    OriginalPrice = 59.99m
+                },
+                new ProductVariant
+                {
+                    ProductId = 8,
+                    EditionId = 5,
+                    Price = 9.99m,
+                    OriginalPrice = 24.99m,
+                },
+                new ProductVariant
+                {
+                    ProductId = 9,
+                    EditionId = 5,
+                    Price = 14.99m
+                }
+            );
         }
     }
 }
