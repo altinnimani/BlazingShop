@@ -35,7 +35,7 @@ namespace BlazingShop.Client.Services.CartService
 
             var product = await _productService.GetProduct(productVariant.ProductId);
             _toastService.ShowSuccess(product.Title, "Added to cart:");
-            
+
             OnChange.Invoke();
         }
 
@@ -66,9 +66,18 @@ namespace BlazingShop.Client.Services.CartService
                     cartItem.Price = variant.Price;
                 }
 
-                result.Add(cartItem);
+                var checker = result.Find(x => x.ProductId == cartItem.ProductId && x.EditionId == cartItem.EditionId);
+                if (checker != null)
+                {
+                    result.FirstOrDefault(x => x.ProductId == cartItem.ProductId && x.EditionId == cartItem.EditionId).Quantity++;
+                }
+                else
+                {
+                    cartItem.Quantity = 1;
+                    result.Add(cartItem);
+                }
             }
-            return result;
+            return result.OrderByDescending(r => r.Price).ToList();
         }
 
         public async Task DeleteItem(CartItem item)
@@ -80,9 +89,12 @@ namespace BlazingShop.Client.Services.CartService
             }
             var cartItem = cart.Find(x => x.ProductId == item.ProductId && x.EditionId == item.EditionId);
 
+            if (cartItem == null)
+            {
+                return;
+            }
             cart.Remove(cartItem);
             await _localStorage.SetItemAsync("cart", cart);
-
             OnChange.Invoke();
         }
     }
