@@ -8,5 +8,6 @@ namespace BlazingShop.Client.Services.CartService
         Task AddToCart(ProductVariant productVariant);
         Task<List<CartItem>> GetCartItems();
         Task DeleteItem(CartItem item);
+        Task AddDTOItem(CartItem item);
     }
 }

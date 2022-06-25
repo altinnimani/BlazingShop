@@ -1,6 +1,5 @@
 ﻿using BlazingShop.Server.Services.CategoryService;
 using BlazingShop.Shared;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazingShop.Server.Controllers

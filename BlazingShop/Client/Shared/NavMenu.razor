@@ -1,4 +1,5 @@
 ﻿@inject ICategoryService CategoryService
+@inject IEditionService EditionService
 @inject ILocalStorageService LocalStorage
 @inject AuthenticationStateProvider AuthStateProvider
 
@@ -43,7 +44,21 @@
                 </Authorized>
             </AuthorizeView>
         </li>
-
+        
+        <li class="dropdown-divider"></li>
+        
+        <p style="background-color: white">Search by options below:</p>
+        @foreach (var edition in EditionService.Editions)
+        {
+            <li style="text-decoration: none" class="nav-item px-3">
+                @{
+                    var link = "Filtered/" + edition.Id;
+                }
+                <NavLink class="nav-link" href="@link">
+                    <span class="oi oi-arrow-right" aria-hidden="true"></span> @edition.Name
+                </NavLink>
+            </li>
+        }
     </nav>
 </div>
 
@@ -60,6 +75,7 @@
     protected override async Task OnInitializedAsync()
     {
         await CategoryService.LoadCategories();
+        await EditionService.LoadEditions();
     }
 
     private async void Logout()

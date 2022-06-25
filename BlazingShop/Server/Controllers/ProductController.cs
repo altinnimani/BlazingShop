@@ -34,5 +34,12 @@ namespace BlazingShop.Server.Controllers
         {
             return await _productService.GetProduct(id);
         }
+
+        [HttpGet("Edition/{editionId}")]
+        public async Task<ActionResult<List<Product>>> GetProductsByEdition(int editionId)
+        {
+            var result = await _productService.GetProductsByEdition(editionId);
+            return Ok(result);
+        }
     }
 }

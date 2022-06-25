@@ -18,7 +18,11 @@ else
                 <div class="item-name">
                     <h5><a href="/product/@item.ProductId">@item.ProductTitle</a></h5>
                     <span>@item.EditionName</span>
-                    <button class="btn-delete" @onclick="() => DeleteItem(item)">Delete</button>
+                    <div class="number">
+	                    <span class="minus" @onclick="() => DeleteItem(item)">-</span>
+	                    <input type="text" value="@item.Quantity"/>
+	                    <span class="plus" @onclick="() => AddItem(item)">+</span>
+                    </div>
                 </div>
                 <div class="item-price">@item.Quantity x @item.Price = @(item.Price * item.Quantity)</div>
             </div>
@@ -46,6 +50,12 @@ else
     private async Task DeleteItem(CartItem item)
     {
         await CartService.DeleteItem(item);
+        cartItems = await CartService.GetCartItems();
+    }
+
+    private async Task AddItem(CartItem item)
+    {
+        await CartService.AddDTOItem(item);
         cartItems = await CartService.GetCartItems();
     }
 

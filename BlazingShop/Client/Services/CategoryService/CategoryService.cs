@@ -11,7 +11,7 @@ namespace BlazingShop.Client.Services.CategoryService
 
         public CategoryService(HttpClient http)
         {
-            this._http = http;
+            _http = http;
         }
 
         public async Task LoadCategories()

@@ -1,6 +1,7 @@
 using BlazingShop.Client;
 using BlazingShop.Client.Services.CartService;
 using BlazingShop.Client.Services.CategoryService;
+using BlazingShop.Client.Services.EditionService;
 using BlazingShop.Client.Services.ProductService;
 using Blazored.LocalStorage;
 using Blazored.Toast;
@@ -16,6 +17,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IEditionService, EditionService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredToast();
 builder.Services.AddOptions();

@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace BlazingShop.Shared
+﻿namespace BlazingShop.Shared
 {
     public class Edition
     {

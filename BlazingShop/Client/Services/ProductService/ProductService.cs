@@ -6,7 +6,6 @@ namespace BlazingShop.Client.Services.ProductService
     public class ProductService : IProductService
     {
         private readonly HttpClient _http;
-
         public event Action OnChange;
 
         public List<Product> Products { get; set; } = new List<Product>();
@@ -32,6 +31,12 @@ namespace BlazingShop.Client.Services.ProductService
         public async Task<Product> GetProduct(int id)
         {
             return await _http.GetFromJsonAsync<Product>($"api/product/{id}");
+        }
+
+        public async Task LoadProductsByEditionAsync(int editionId)
+        {
+            Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product/Edition/{editionId}");
+            OnChange.Invoke();
         }
     }
 }

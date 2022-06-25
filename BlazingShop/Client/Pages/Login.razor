@@ -22,7 +22,6 @@
 
     private async void HandleLogin()
     {
-        Console.WriteLine("Log me in!");
         await LocalStorage.SetItemAsync<string>("username", user.Username);
         await AuthStateProvider.GetAuthenticationStateAsync();
         NavigationManager.NavigateTo("");
