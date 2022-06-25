@@ -30,9 +30,8 @@
     [Parameter]
     public int Id { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        Console.WriteLine("id is " + Id);
         ProductService.LoadProductsByEditionAsync(Id);
         ProductService.OnChange += StateHasChanged;
     }

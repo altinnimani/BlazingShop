@@ -52,6 +52,5 @@ namespace BlazingShop.Server.Services.ProductService
             }
             return result;
         }
-
     }
 }

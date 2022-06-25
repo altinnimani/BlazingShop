@@ -62,7 +62,7 @@ namespace BlazingShop.Client.Services.CartService
                 var variant = product.Variants.Find(x => x.EditionId == item.EditionId);
                 if (variant != null)
                 {
-                    cartItem.EditionName = variant.Edition?.Name;
+                    cartItem.EditionName = variant.Edition.Name;
                     cartItem.Price = variant.Price;
                 }
 
@@ -76,7 +76,7 @@ namespace BlazingShop.Client.Services.CartService
                     result.Add(cartItem);
                 }
             }
-            return result.OrderByDescending(r => r.Price).ToList();
+            return result.OrderByDescending(r => (r.Price /* * r.Quantity*/)).ToList();
         }
 
         public async Task DeleteItem(CartItem item)
