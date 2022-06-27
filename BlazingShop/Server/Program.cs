@@ -2,9 +2,8 @@ using BlazingShop.Server.Data;
 using BlazingShop.Server.Services.CategoryService;
 using BlazingShop.Server.Services.EditionService;
 using BlazingShop.Server.Services.ProductService;
-using Microsoft.AspNetCore.ResponseCompression;
+using BlazingShop.Server.Services.StatsService;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +18,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IEditionService, EditionService>();
+builder.Services.AddScoped<IStatsService, StatsService>();
 
 var app = builder.Build();
 

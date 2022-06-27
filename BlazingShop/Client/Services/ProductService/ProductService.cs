@@ -33,10 +33,9 @@ namespace BlazingShop.Client.Services.ProductService
             return await _http.GetFromJsonAsync<Product>($"api/product/{id}");
         }
 
-        public async Task LoadProductsByEditionAsync(int editionId)
+        public async Task<List<Product>> GetProductsByEditionAsync(int editionId)
         {
-            Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product/Edition/{editionId}");
-            OnChange.Invoke();
+            return await _http.GetFromJsonAsync<List<Product>>($"api/Product/Edition/{editionId}");
         }
     }
 }

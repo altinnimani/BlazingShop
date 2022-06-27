@@ -17,7 +17,10 @@ else
                 <div class="item-image-wrapper"><img src="@item.Image" class="item-image"></div>
                 <div class="item-name">
                     <h5><a href="/product/@item.ProductId">@item.ProductTitle</a></h5>
-                    <span>@item.EditionName</span>
+                    @if (@item.EditionName.CompareTo("Default") != 0)
+                    {
+                        <span>@item.EditionName</span>
+                    }
                     <div class="number">
 	                    <span class="minus" @onclick="() => DeleteItem(item)">-</span>
 	                    <input type="text" value="@item.Quantity"/>

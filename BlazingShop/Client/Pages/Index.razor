@@ -3,6 +3,7 @@
 @inject ICategoryService CategoryService
 @inject IProductService ProductService
 @inject ISyncLocalStorageService LocalStorage
+@inject IStatsService StatsService
 
 @if (category != null)
 {
@@ -13,7 +14,8 @@ else
 {
     <AuthorizeView>
         <NotAuthorized>
-            <h1>Welcome to Blazing Shop</h1>   
+            <h1>Welcome to Blazing Shop</h1>
+            <p>Number of total daily visits: @numberOfVisits</p>
         </NotAuthorized>
 
         <Authorized>
@@ -28,6 +30,7 @@ else
 {
     [Parameter]
     public string CategoryUrl { get; set; }
+    public int numberOfVisits;
 
     private Category category = null;
 
@@ -43,5 +46,8 @@ else
         {
             category = null;
         }
+
+        await StatsService.IncrementVisits();
+        numberOfVisits = await StatsService.GetVisits();
     }
 }
