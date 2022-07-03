@@ -2,7 +2,7 @@
 
 Hello and thank you for visiting my repository!
 
-This repository is a E-Commerce Website created with Blazor.
+This ongoing repository is an E-Commerce Website created with Blazor.
 
 This is how you can run the application.
 
