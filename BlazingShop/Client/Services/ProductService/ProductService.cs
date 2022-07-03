@@ -37,5 +37,10 @@ namespace BlazingShop.Client.Services.ProductService
         {
             return await _http.GetFromJsonAsync<List<Product>>($"api/Product/Edition/{editionId}");
         }
+
+        public async Task<List<Product>> SearchProducts(string searchText)
+        {
+            return await _http.GetFromJsonAsync<List<Product>>($"api/Product/Search/{searchText}");
+        }
     }
 }

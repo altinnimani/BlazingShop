@@ -41,5 +41,11 @@ namespace BlazingShop.Server.Controllers
             var result = await _productService.GetProductsByEdition(editionId);
             return Ok(result);
         }
+
+        [HttpGet("Search/{searchedText}")]
+        public async Task<ActionResult<List<Product>>> SearchProducts(string searchedText)
+        {
+            return Ok(await _productService.SearchProducts(searchedText));
+        }
     }
 }
